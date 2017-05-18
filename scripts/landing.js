@@ -3,20 +3,21 @@ var pointsArray = document.getElementsByClassName('point');
 var animatePoints = function(points) {
     var revealPoint = function(pointIndex)
     {
-        points[pointIndex].style.opacity = 1;
-        points[pointIndex].style.transform = "scaleX(1) translateY(0)";
-        points[pointIndex].style.msTransform = "scaleX(1) translateY(0)";
-        points[pointIndex].style.WebkitTransform = "scaleX(1) translateY(0)";
+        pointIndex.style.opacity = 1;
+        pointIndex.style.transform = "scaleX(1) translateY(0)";
+        pointIndex.style.msTransform = "scaleX(1) translateY(0)";
+        pointIndex.style.WebkitTransform = "scaleX(1) translateY(0)";
 
-        points[pointIndex].style.transition = "all 2s";
-        points[pointIndex].style.mstransition = "all 2s";
-        points[pointIndex].style.WebkitTransition = "all 2s";
+        pointIndex.style.transition = "all 2s";
+        pointIndex.style.mstransition = "all 2s";
+        pointIndex.style.WebkitTransition = "all 2s";
     };
 
-    for (var x = 0; x < points.length; x++)
-        {
-            revealPoint(x);
-        }
+    forEach(points, revealPoint);
+    //for (var x = 0; x < points.length; x++)
+    //    {
+    //        revealPoint(x);
+    //    }
 };
 
 window.onload = function() {
