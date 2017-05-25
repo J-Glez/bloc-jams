@@ -28,7 +28,22 @@ var albumMarconi = {
      ]
  };
 
- var createSongRow = function(songNumber, songName, songLength) {
+var albumBeeGees = {
+      title: 'Greatest',
+      artist: 'Bee Gees',
+      label: 'Bee Gees Catalog',
+      year: '2016',
+      albumArtUrl: 'assets/images/album_covers/Bee Gees.png',
+      songs: [
+          { title: 'Jive Talkin', duration: '3:45' },
+          { title: 'Night Fever', duration: '3:32' },
+          { title: 'Tragedy', duration: '5:03'},
+          { title: 'You should be dancing', duration: '4:17' },
+          { title: 'Stayin Alive', duration: '4:45'}
+      ]
+ };
+
+var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number">' + songNumber + '</td>'
@@ -59,6 +74,20 @@ var setCurrentAlbum = function(album) {
       }
   };
 
-  window.onload = function() {
+window.onload = function() {
       setCurrentAlbum(albumPicasso);
   };
+
+document.getElementsByClassName('album-view container narrow')[0].addEventListener('click', function() {
+      var currentAlbum = albumTitle = document.getElementsByClassName('album-view-title')[0];
+      if (currentAlbum.firstChild.nodeValue === "The Colors") {
+          setCurrentAlbum(albumMarconi)
+        }
+        else if (currentAlbum.firstChild.nodeValue === "The Telephone") {
+          setCurrentAlbum(albumBeeGees)
+        }
+        else {
+            setCurrentAlbum(albumPicasso)
+        }
+      //console.log(currentAlbum.firstChild.nodeValue);
+  });
