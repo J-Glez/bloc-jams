@@ -63,9 +63,20 @@ var findParentByClassName = function(element, className) {
     if (element) {
         var parentOfElement = element.parentElement;
 
+        if (parentOfElement === null){
+            console.log("No parent found");
+            return;
+        }
+
         while (parentOfElement.className !== className && parentOfElement.className !== null) {
             parentOfElement = parentOfElement.parentElement;
         }
+
+        if (parentOfElement.className !== className){
+            console.log("No parent found with that class name");
+            return;
+        }
+
         return parentOfElement;
     }
 };
@@ -110,7 +121,6 @@ var getSongItem = function (element) {
 
 var clickHandler = function(targetElement) {
     var songItem = getSongItem(targetElement);
-console.log(songItem);
 
     if (currentlyPlayingSong === null) {
          songItem.innerHTML = pauseButtonTemplate;
