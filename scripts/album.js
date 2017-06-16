@@ -100,38 +100,20 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
  };
 
-var nextSong = function() {
-    // Know what the previous song is. This includes the situation in which the next song is the first song, following the final song in the album (that is, it should "wrap" around).
-    // Use the trackIndex() helper function to get the index of the current song and then increment the value of the index.
-    // Set a new current song to currentSongFromAlbum.
-    // Update the player bar to show the new song.
-    // Update the HTML of the previous song's .song-item-number element with a number.
-    // Update the HTML of the new song's .song-item-number element with a pause button.
+var scrollSongs = function() {
     var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-    currentIndex++;
-
-    if (currentIndex >= currentAlbum.songs.length) {
-        currentIndex = 0;
+    if (this.className === 'next') {
+        currentIndex++;
+        if (currentIndex >= currentAlbum.songs.length) {
+            currentIndex = 0;
+        }
     }
+    else {
+        currentIndex--;
 
-    var lastSongNumber = parseInt(currentlyPlayingSongNumber);
-
-    setSong(parseInt(currentIndex + 1));
-    updatePlayerBarSong();
-
-    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-
-    $nextSongNumberCell.html(pauseButtonTemplate);
-    $lastSongNumberCell.html(lastSongNumber);
-};
-
-var previousSong = function() {
-    var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-    currentIndex--;
-
-    if (currentIndex < 0) {
-        currentIndex = currentAlbum.songs.length - 1;
+        if (currentIndex < 0) {
+            currentIndex = currentAlbum.songs.length - 1;
+        }
     }
 
     var lastSongNumber = parseInt(currentlyPlayingSongNumber);
@@ -169,6 +151,6 @@ var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
-    $previousButton.click(previousSong);
-    $nextButton.click(nextSong);
+    $previousButton.click(scrollSongs);
+    $nextButton.click(scrollSongs);
 });
